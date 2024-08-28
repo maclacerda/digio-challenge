@@ -1,0 +1,313 @@
+name: DigioApp
+options:
+  postGenCommand: scripts/postgen.sh
+  bundleIdPrefix: com.digio
+  xcodeVersion: '12.0'
+  deploymentTarget: '12.0'
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  minimumXcodeGenVersion: '2.20.0'
+
+##################
+# CONFIGURATIONS #
+##################
+
+configs:
+  Development: debug
+  Stage: debug
+  Release: release
+
+##################
+# SETTINGS       #
+##################
+
+settings:
+  base:
+    ALWAYS_SEARCH_USER_PATHS: NO
+    CLANG_ANALYZER_NONNULL: YES
+    CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION: YES_AGGRESSIVE
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+    CLANG_CXX_LANGUAGE_STANDARD: gnu++14
+    CLANG_CXX_LIBRARY: libc++
+    CLANG_ENABLE_MODULES: YES
+    CLANG_ENABLE_OBJC_ARC: YES
+    CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING: YES
+    CLANG_WARN_BOOL_CONVERSION: YES
+    CLANG_WARN_COMMA: YES
+    CLANG_WARN_CONSTANT_CONVERSION: YES
+    CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS: YES
+    CLANG_WARN_DIRECT_OBJC_ISA_USAGE: YES_ERROR
+    CLANG_WARN_DOCUMENTATION_COMMENTS: YES
+    CLANG_WARN_EMPTY_BODY: YES
+    CLANG_WARN_ENUM_CONVERSION: YES
+    CLANG_WARN_INFINITE_RECURSION: YES
+    CLANG_WARN_INT_CONVERSION: YES
+    CLANG_WARN_NON_LITERAL_NULL_CONVERSION: YES
+    CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF: YES
+    CLANG_WARN_OBJC_LITERAL_CONVERSION: YES
+    CLANG_WARN_OBJC_ROOT_CLASS: YES_ERROR
+    CLANG_WARN_RANGE_LOOP_ANALYSIS: YES
+    CLANG_WARN_STRICT_PROTOTYPES: YES
+    CLANG_WARN_SUSPICIOUS_MOVE: YES
+    CLANG_WARN_UNGUARDED_AVAILABILITY: YES_AGGRESSIVE
+    CLANG_WARN_UNREACHABLE_CODE: YES
+    CLANG_WARN_DUPLICATE_METHOD_MATCH: YES
+    CODE_SIGN_IDENTITY: iPhone Developer
+    COPY_PHASE_STRIP: NO
+    ENABLE_STRICT_OBJC_MSGSEND: YES
+    ENABLE_TESTABILITY: YES
+    GCC_C_LANGUAGE_STANDARD: gnu11
+    GCC_GENERATE_TEST_COVERAGE_FILES: YES
+    GCC_NO_COMMON_BLOCKS: YES
+    GCC_WARN_64_TO_32_BIT_CONVERSION: YES
+    GCC_WARN_ABOUT_RETURN_TYPE: YES_ERROR
+    GCC_WARN_UNDECLARED_SELECTOR: YES
+    GCC_WARN_UNINITIALIZED_AUTOS: YES_AGGRESSIVE
+    GCC_WARN_UNUSED_FUNCTION: YES
+    GCC_WARN_UNUSED_VARIABLE: YES
+    GCC_OPTIMIZATION_LEVEL: 0
+    IPHONEOS_DEPLOYMENT_TARGET: 12.0
+    SDKROOT: iphoneos
+    SWIFT_VERSION: 5.0
+  configs:
+    Development:
+      ENV: dev
+      ENABLE_BITCODE: NO
+      GCC_DYNAMIC_NO_PIC: NO
+      GCC_PREPROCESSOR_DEFINITIONS: DEBUG=1 $(inherited)
+      MTL_ENABLE_DEBUG_INFO: YES
+      ONLY_ACTIVE_ARCH: YES
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      DEBUG_INFORMATION_FORMAT: dwarf
+    Stage:
+      ENV: stg
+      ENABLE_BITCODE: NO
+      GCC_DYNAMIC_NO_PIC: NO
+      GCC_PREPROCESSOR_DEFINITIONS: DEBUG=1 $(inherited)
+      MTL_ENABLE_DEBUG_INFO: YES
+      ONLY_ACTIVE_ARCH: YES
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      DEBUG_INFORMATION_FORMAT: dwarf
+    Release: 
+      ENV: prd
+      ENABLE_BITCODE: YES
+      GCC_DYNAMIC_NO_PIC: NO
+      MTL_ENABLE_DEBUG_INFO: NO
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
+      VALIDATE_PRODUCT: YES
+      DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+##################
+# TARGETS        #
+##################
+
+targets:
+  DigioApp:
+    type: application
+    platform: iOS
+
+    sources:
+      - path: Digio
+        excludes:
+          - "**/*.a"
+    
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_ENTITLEMENTS:
+        COD_SIGN_IDENTITY: iPhone Developer
+        COD_SIGN_IDENTITY[sdk=iphoneos*]: iPhone Developer
+        COD_SIGN_STYLE: Manual
+        DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+        DEVELOPMENT_TEAM:
+        ENABLE_BITCODE: NO
+        GCC_GENERATE_TEST_COVERAGE_FILES: YES
+        INFOPLIST_FILE: Digio/SupportingFiles/Info.plist
+        IPHONEOS_DEPLOYMENT_TARGET: 12.0
+        LD_RUNPATH_SEARCH_PATHS: $(inherited) @executable_path/Frameworks
+        LIBRARY_SEARCH_PATHS: $(inherited)
+        PRODUCT_BUNDLE_IDENTIFIER: com.digio
+        PRODUCT_NAME: Digio
+        PROVISIONING_PROFILE:
+        PROVISIONING_PROFILE_SPECIFIER: Desenvolvimento - Digio
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: 1
+      configs:
+        Development:
+          APP_BUNDLE_IDENTIFIER: com.digio.development
+          COPY_PHASE_STRIP: NO
+          ENV: dev
+          GCC_DYNAMIC_NO_PIC: NO
+          GCC_OPTIMIZATION_LEVEL: 0
+          VALID_ARCHS: $(ARCHS_STANDARD)
+        Stage: 
+          APP_BUNDLE_IDENTIFIER: com.digio.stage
+          COPY_PHASE_STRIP: NO
+          ENV: stg
+          GCC_DYNAMIC_NO_PIC: NO
+          GCC_OPTIMIZATION_LEVEL: 0
+          VALID_ARCHS: $(ARCHS_STANDARD)
+        Release:
+          APP_BUNDLE_IDENTIFIER: com.digio
+          COPY_PHASE_STRIP: YES
+          ENV: prd
+          ENABLE_TESTABILITY: YES
+          VALID_ARCHS: $(ARCHS_STANDARD)
+    
+    dependencies:
+      - sdk: SystemConfiguration.framework
+      - sdk: libsqlite3.tbd
+
+    postBuildScripts:
+      - script: |
+                if test -d "/opt/homebrew/bin/"; then
+                  PATH="/opt/homebrew/bin/:${PATH}"
+                fi
+
+                export PATH
+
+                if which swiftlint >/dev/null; then
+                  if [[ -n $WORKSPACE ]]; then
+                    echo "Running on CI" && exit 0
+                  fi
+
+                  if [ -f "$FILE" ]; then
+                    echo "Swiftlint Configuration file finded"
+                  fi
+
+                  swiftlint --config "${PROJECT_DIR}/.swiftlint.yml"
+                  swiftlint
+                else
+                  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+        name: SwiftLint
+
+  DigioAppTests:
+    type: bundle.unit-test
+    platform: iOS
+
+    dependencies:
+      - target: DigioApp
+
+    sources:
+      - DigioTests/
+    
+    settings:
+      base:
+        BUNDLE_LOADER: $(TEST_HOST)
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM:
+        GCC_GENERATE_TEST_COVERAGE_FILES: YES
+        INFOPLIST_FILE: DigioTests/Info.plist
+        LD_RUNPATH_SEARCH_PATHS: $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+        PRODUCT_BUNDLE_IDENTIFIER: com.digio.DigioTests
+        PRODUCT_NAME: $(TARGET_NAME)
+        PROVISIONING_PROFILE_SPECIFIER:
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: 1,2
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Digio.app/Digio
+      debug:
+        CODE_SIGN_IDENTITY: iPhone Developer
+      release:
+        ENABLE_TESTABILITY: YES
+
+  DigioAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    
+    dependencies:
+      - target: DigioApp
+
+    sources:
+      - DigioUITests/
+    
+    settings:
+      base:
+        CODE_SIGN_IDENTITY: iPhone Developer
+        CODE_SIGN_STYLE: Manual
+        GCC_GENERATE_TEST_COVERAGE_FILES: YES
+        INFOPLIST_FILE: DigioUITests/Info.plist
+        LD_RUNPATH_SEARCH_PATHS: $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+        PRODUCT_BUNDLE_IDENTIFIER: com.digio.DigioUITests
+        PRODUCT_NAME: $(TARGET_NAME)
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: 1,2
+        TEST_HOST:
+        TEST_TARGET_NAME: DigioApp
+        VALID_ARCHS: $(ARCHS_STANDARD)
+      debug:
+        DEVELOPMENT_TEAM:
+        PROVISIONING_PROFILE_SPECIFIER:
+      stage:
+        DEVELOPMENT_TEAM:
+        PROVISIONING_PROFILE_SPECIFIER:
+      release:
+        DEVELOPMENT_TEAM:
+        PROVISIONING_PROFILE_SPECIFIER:
+
+##################
+# SCHEMES        #
+##################
+
+schemes:
+  DigioApp:
+    build:
+      targets:
+        DigioApp: all
+        DigioAppTests: [test]
+        DigioAppUITests: none
+      parallelizeBuild: true
+      buildImplicitDependencies: true
+    run:
+      config: Development
+      debugEnabled: true
+    test:
+      config: Development
+      debugEnable: true
+      commandLineArguments: "testing"
+      language: "Portuguese (Brazil)"
+      region: "Brazil"
+      gatherCoverageData: true
+      coverageTargets:
+        - DigioApp
+      targets:
+        - name: DigioAppTests
+          parallelizable: true
+    profile:
+      config: Development
+    analyze:
+      config: Development
+    archive:
+        config: Development
+        revealArchiveInOrganizer: true
+  DigioAppUITests:
+    build:
+      targets:
+        DigioApp: all
+        DigioAppTests: none
+        DigioAppUITests: [test]
+      parallelizeBuild: true
+      buildImplicitDependencies: true
+    run:
+      config: Development
+      debugEnabled: true
+    test:
+      config: Development
+      debugEnable: true
+      commandLineArguments: "uitesting"
+      language: "Portuguese (Brazil)"
+      region: "Brazil"
+      gatherCoverageData: false
+      targets:
+        - name: DigioAppUITests
+          parallelizable: true
+    profile:
+      config: Development
+    analyze:
+      config: Development
+    archive:
+        config: Development
+        revealArchiveInOrganizer: true

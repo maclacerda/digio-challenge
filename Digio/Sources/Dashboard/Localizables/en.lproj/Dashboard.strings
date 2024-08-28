@@ -1,0 +1,11 @@
+/* 
+  Dashboard.strings
+  DigioApp
+
+  Created by Marcos Ferreira on 28/08/24.
+  
+*/
+
+"welcomeMessage" = "Olá, %@";
+"loadErrorMessage" = "Falha ao carregar os dados: \n%@";
+"products" = "Produtos";

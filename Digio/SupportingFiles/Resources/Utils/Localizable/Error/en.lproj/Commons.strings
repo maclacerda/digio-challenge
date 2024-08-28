@@ -1,0 +1,13 @@
+/* 
+  Errors.strings
+  DigioApp
+
+  Created by Marcos Ferreira on 28/08/24.
+  
+*/
+
+// Errors
+"ops" = "Ops!";
+
+// Commons
+"ok" = "OK";
